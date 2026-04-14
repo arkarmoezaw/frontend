@@ -1,10 +1,17 @@
 import type { Metadata } from "next";
+
+import { Geist } from "next/font/google";
+
 import { Inter } from "next/font/google";
+
 import "./globals.css";
 import { cn } from "@/lib/utils";
 import QueryProvider from "@/lib/providers/queryProvider";
+import { Toaster } from "sonner";
 
-const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
+const geist = Geist({ subsets: ["latin"], variable: "--font-geist" });
+
+const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 
 export const metadata: Metadata = {
   title: "Ecommerce App",
@@ -23,6 +30,7 @@ export default function RootLayout({
     >
       <body>
         <QueryProvider>{children}</QueryProvider>
+        <Toaster richColors />
       </body>
     </html>
   );
