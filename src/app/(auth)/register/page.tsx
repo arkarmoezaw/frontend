@@ -1,74 +1,48 @@
-"use client";
+import Link from "next/link";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { RegisterSchema, registerSchema } from "@/lib/schemas/auth.schema";
-import FormInput from "@/components/forms/FormInput";
-import FormPassword from "@/components/forms/FormPassword";
-import { Mail, User } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
-const Register = () => {
-  const { control, handleSubmit } = useForm<RegisterSchema>({
-    resolver: zodResolver(registerSchema),
-    defaultValues: {
-      name: "",
-      email: "",
-      password: "",
-      confirmPassword: "",
-    },
-  });
+import { User } from "lucide-react";
+import RegisterForm from "./RegisterForm";
+import Footer from "@/components/Footer";
 
-  const onSubmit = async (data: RegisterSchema) => {
-    console.log("Register:", data);
-  };
-
+export default function page() {
   return (
-    <div className="flex min-h-screen items-center justify-center">
-      <form
-        onSubmit={handleSubmit(onSubmit)}
-        className="w-full max-w-md space-y-4 rounded-xl bg-white p-6 shadow"
-      >
-        <h2 className="text-center text-xl font-bold">Register</h2>
+    <div className="font-gist flex h-screen w-screen flex-col items-center justify-center">
+      <Card className="min-w-100">
+        <CardHeader className="space-y-2 text-center">
+          <div className="mx-auto mb-2 flex h-12 w-12 items-center justify-center rounded-full bg-slate-100 p-3">
+            <User className="h-6 w-6 text-slate-900" />
+          </div>
+          <CardTitle className="text-2xl font-bold">
+            Create an account
+          </CardTitle>
+          <CardDescription className="text-slate-500">
+            Enter your details below to create your account.
+          </CardDescription>
+        </CardHeader>
 
-        <FormInput<RegisterSchema>
-          name="name"
-          label="Name"
-          control={control}
-          icon={User}
-        />
-
-        <FormInput<RegisterSchema>
-          name="email"
-          label="Email"
-          control={control}
-          icon={Mail}
-        />
-
-        <FormPassword<RegisterSchema>
-          name="password"
-          label="Password"
-          control={control}
-        />
-
-        <FormPassword<RegisterSchema>
-          name="confirmPassword"
-          label="Confirm Password"
-          control={control}
-        />
-
-        <button className="w-full rounded-lg bg-indigo-600 py-2 text-white">
-          Register
-        </button>
-
-        <p className="text-center text-sm">
-          Already have account?{" "}
-          <a href="/login" className="text-indigo-600">
-            Login
-          </a>
-        </p>
-      </form>
+        <CardContent>
+          <RegisterForm />
+        </CardContent>
+        <CardFooter className="flex flex-col space-y-4 text-center text-sm text-slate-500">
+          <div>
+            Already have an account?
+            <Button asChild className="-m-2" variant="link">
+              <Link href="/login">Sign in</Link>
+            </Button>
+          </div>
+        </CardFooter>
+      </Card>
+      <Footer />
     </div>
   );
-};
-
-export default Register;
+}

@@ -11,10 +11,10 @@ export const loginSchema = z.object({
 
 export const registerSchema = z
   .object({
-    name: z.string().trim().min(2, "Name must be at least 2 characters."),
+    fullname: z.string().trim().min(2, "Name must be at least 2 characters."),
     email: z.string().trim().email("Invalid email address."),
     password: passwordRules,
-    confirmPassword: z.string(),
+    confirmPassword: z.string().min(0, "Please confirm your password."),
   })
   .refine((data) => data.password === data.confirmPassword, {
     message: "Passwords do not match.",

@@ -26,7 +26,13 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={cn("h-full", "antialiased", "font-sans", inter.variable)}
+      className={cn(
+        "h-full",
+        "antialiased",
+        "font-sans",
+        inter.variable,
+        geist.variable,
+      )}
     >
       <body>
         <QueryProvider>{children}</QueryProvider>
