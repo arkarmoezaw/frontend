@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 import {
   Card,
@@ -13,8 +15,14 @@ import { Button } from "@/components/ui/button";
 import { User } from "lucide-react";
 import RegisterForm from "./RegisterForm";
 import Footer from "@/components/Footer";
+import { useQuery } from "@tanstack/react-query";
+import { useLoadAllUsers } from "@/lib/hooks/userHook";
 
 export default function page() {
+  const { data, isLoading, error, isError } = useLoadAllUsers();
+
+  console.log("Users Data", data);
+
   return (
     <div className="font-gist flex h-screen w-screen flex-col items-center justify-center">
       <Card className="min-w-100">
